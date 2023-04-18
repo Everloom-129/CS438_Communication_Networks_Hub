@@ -30,7 +30,7 @@ Currently, there are two main WiFi across the campus, illinois Net and Eduroam. 
 1. **Data Collection:** Utilize WiFi and LTE Analyzer Apps to measure signal strength, network performance, the AP or cell tower connected and other relevant parameters at various locations within the Thomas M. Siebel Center. 
 
 
-    <center>    <img style="border-radius: 0.3125em;    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"     src="./Wireless_Project_Proposal.assets/image-20230405230704679.png">    <br>    <div style="color:orange; border-bottom: 1px solid #d9d9d9;    display: inline-block;    color: #999;    padding: 2px;">First Floor Plan</div> </center>
+<center>    <img style="border-radius: 0.3125em;    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"     src="./Wireless_Project_Proposal.assets/image-20230405230704679.png">    <br>    <div style="color:orange; border-bottom: 1px solid #d9d9d9;    display: inline-block;    color: #999;    padding: 2px;">First Floor Plan</div> </center>
 
 2. **Network Heat Map Creation:** Create a heat map of the Thomas M. Siebel Center using NetSpot and other open-source software, highlighting areas with strong, moderate, and weak signal strength. Identify any dead zones or areas with high network interference. 
 
@@ -47,7 +47,7 @@ Currently, there are two main WiFi across the campus, illinois Net and Eduroam. 
 5. **User Localization:** Explore user location based on detected APs and their signal strengths. Write a python program to monitor the flow density of network usage in the whole building. This can help in understanding user density in different areas of the campus and further optimize network performance.  
 
 6. **AP Switching Analysis:** Monitor and record  which AP the device is connecting to and analyze relevant factors of an AP switch, such as signal strength,  network load, and interference from other devices and distance from the two APs.
-    
+   
 7. **Improvement Recommendations:** Propose improvements to the existing wireless network infrastructure based on the analysis, such as adding or relocating APs.
 
 ### Potential Challenges
