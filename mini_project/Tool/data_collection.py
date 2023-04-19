@@ -1,33 +1,42 @@
-import os
 import sys
-import csv
 import time
-from scapy.all import *
+import pywifi
+from pywifi import const
 
+def scan_wifi(interface):
+    interface.scan()
+    time.sleep(3)  # Give some time for the scan to complete
+    networks = interface.scan_results()
 
-def signal_handler(signal, frame):
-    sys.exit(0)
+    for network in networks:
+        ssid = network.ssid
+        bssid = network.bssid
+        signal_strength = network.signal
 
+        print(f"SSID: {ssid}, BSSID: {bssid}, Signal Strength: {signal_strength} dBm")
 
-def callback(packet):
-    if packet.haslayer(Dot11):
-        if packet.type == 0 and packet.subtype == 8:
-            bssid = packet.addr2
-            ssid = packet.info.decode("utf-8")
-            signal_strength = -(256 - packet.notdecoded[-4:-3][0])
-
-            print(f"SSID: {ssid}, BSSID: {bssid}, Signal Strength: {signal_strength} dBm")
-
-
-if __name__ == "__main__":
-    interface = "wlan0"
+def main():
+    print("start finding wifi connection")
+    wifi = pywifi.PyWiFi()
 
     if len(sys.argv) > 1:
-        interface = sys.argv[1]
-
-    if os.geteuid() != 0:
-        print("Please run this script as root.")
+        interface_name = sys.argv[1]
+    else:
+        interface_name = None
+    
+    for iface in wifi.interfaces():
+        if interface_name is None or iface.name() == interface_name:
+            interface = iface
+            break
+    else:
+        print(f"No Wi-Fi interface with name '{interface_name}' found.")
         sys.exit(1)
 
-    print(f"Sniffing on interface {interface}")
-    sniff(iface=interface, prn=callback, store=0)
+    print(f"Scanning Wi-Fi networks on interface {interface.name()}")
+
+    while True:
+        scan_wifi(interface)
+        time.sleep(5)  # Wait for 5 seconds before scanning again
+
+if __name__ == "__main__":
+    main()
