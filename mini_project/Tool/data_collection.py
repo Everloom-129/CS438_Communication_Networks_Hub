@@ -47,8 +47,8 @@ def main():
         while FLAG<3:
             wifi_data = scan_wifi(interface)
             for data in wifi_data:
-                csv_writer.writerow(data)
-
+                if data[0] == "IllinoisNet" or data[0] == "eduroam":
+                    csv_writer.writerow(data)
             time.sleep(5)  # Wait for 5 seconds before scanning again
             FLAG += 1
 if __name__ == "__main__":
