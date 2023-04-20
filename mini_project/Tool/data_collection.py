@@ -1,6 +1,7 @@
 import sys
 import time
 import pywifi
+import csv
 from pywifi import const
 
 def scan_wifi(interface):
@@ -8,12 +9,17 @@ def scan_wifi(interface):
     time.sleep(3)  # Give some time for the scan to complete
     networks = interface.scan_results()
 
+    wifi_data = []
+
     for network in networks:
         ssid = network.ssid
         bssid = network.bssid
         signal_strength = network.signal
 
+        wifi_data.append([ssid, bssid, signal_strength])
         print(f"SSID: {ssid}, BSSID: {bssid}, Signal Strength: {signal_strength} dBm")
+
+    return wifi_data
 
 def main():
     print("start finding wifi connection")
@@ -34,9 +40,16 @@ def main():
 
     print(f"Scanning Wi-Fi networks on interface {interface.name()}")
 
-    while True:
-        scan_wifi(interface)
-        time.sleep(5)  # Wait for 5 seconds before scanning again
+    with open("raw_data.csv", mode="w", newline="") as csv_file:
+        csv_writer = csv.writer(csv_file)
+        csv_writer.writerow(["SSID", "BSSID", "Signal Strength"])
+        FLAG = 0
+        while FLAG<3:
+            wifi_data = scan_wifi(interface)
+            for data in wifi_data:
+                csv_writer.writerow(data)
 
+            time.sleep(5)  # Wait for 5 seconds before scanning again
+            FLAG += 1
 if __name__ == "__main__":
     main()
