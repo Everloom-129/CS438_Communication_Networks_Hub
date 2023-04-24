@@ -3,14 +3,9 @@ import time
 import pywifi
 import csv
 from pywifi import const
-from geopy.geocoders import Nominatim
 
 def scan_wifi(interface):
     interface.scan()
-    geolocator = Nominatim(user_agent="my_app")
-    location = geolocator.geocode("my loncation", timeout=5)# 
-    print("Latitude:", location.latitude)
-    print("Longitude:", location.longitude)
     time.sleep(3)  # Give some time for the scan to complete
     networks = interface.scan_results()
 
@@ -20,9 +15,8 @@ def scan_wifi(interface):
         ssid = network.ssid
         bssid = network.bssid
         signal_strength = network.signal
-        latitude = location.latitude
-        longitude = location.longitude
-        wifi_data.append([ssid, bssid, signal_strength, latitude, longitude])
+
+        wifi_data.append([ssid, bssid, signal_strength])
         print(f"SSID: {ssid}, BSSID: {bssid}, Signal Strength: {signal_strength} dBm")
 
     return wifi_data
@@ -46,9 +40,9 @@ def main():
 
     print(f"Scanning Wi-Fi networks on interface {interface.name()}")
 
-    with open("raw_data/raw_data.csv", mode="w", newline="") as csv_file:
+    with open("raw_data.csv", mode="w", newline="") as csv_file:
         csv_writer = csv.writer(csv_file)
-        csv_writer.writerow(["SSID", "BSSID", "Signal Strength", "Latitude", "Longitude"])
+        csv_writer.writerow(["SSID", "BSSID", "Signal Strength"])
         FLAG = 0
         while FLAG<3:
             wifi_data = scan_wifi(interface)
