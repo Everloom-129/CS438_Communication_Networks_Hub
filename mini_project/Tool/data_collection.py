@@ -40,7 +40,7 @@ def main():
 
     print(f"Scanning Wi-Fi networks on interface {interface.name()}")
 
-    with open("raw_data.csv", mode="w", newline="") as csv_file:
+    with open("raw_data\raw_data.csv", mode="w", newline="") as csv_file:
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow(["SSID", "BSSID", "Signal Strength"])
         FLAG = 0
