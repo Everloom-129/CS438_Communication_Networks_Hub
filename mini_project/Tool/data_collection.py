@@ -40,14 +40,14 @@ def main():
 
     print(f"Scanning Wi-Fi networks on interface {interface.name()}")
 
-    with open("raw_data\raw_data.csv", mode="w", newline="") as csv_file:
+    with open("raw_data//raw_data.csv", mode="w", newline="") as csv_file:
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow(["SSID", "BSSID", "Signal Strength"])
         FLAG = 0
-        while FLAG<3:
+        while FLAG<1:
             wifi_data = scan_wifi(interface)
             for data in wifi_data:
-                if data[0] == "IllinoisNet" or data[0] == "eduroam":
+                if True: #data[0] == "IllinoisNet" or data[0] == "eduroam":
                     csv_writer.writerow(data)
             time.sleep(5)  # Wait for 5 seconds before scanning again
             FLAG += 1
