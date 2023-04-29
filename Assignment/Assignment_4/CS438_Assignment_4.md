@@ -212,19 +212,38 @@ F(A)B, A(B)C, B(C)D, E(A)B
 No, because F or E may be sending to A at the same time, and a collision will occur.
 
 ### 3. ACK is necessary
-For wireless network, there might be a lot of inferences to the signal. Node A sends an ACK message to confirm that it has successfully received the packet. If node B doesn't receive an ACK message within a certain timeframe, it will assume that the packet is lost and resend the packet. So it is necessary to send an ACK message to ensure reliable wireless transfer.
+For wireless network, the unstable environment causes a lot of inferences to the signal. 
 
-### 4.
-#### (a)
-Suppose the received signal power at D is P, then the inference from A at D is $\frac{P}{3^2}=\frac{P}{9}$.
-$SINR=\frac{P}{P/9}=9$.
-#### (b)
-Suppose the received signal power at D is P, then the noise power at D is P/18.$SINR=\frac{P}{P/18}=18$.
+- Node A sends an ACK message to confirm that it has successfully received the packet. 
+- If node B doesn't receive an ACK message within a certain timeframe, it will assume that the packet is lost and resend the packet.
+-  So it is necessary to send an ACK message to ensure reliable wireless transfer.
 
-### 5.
-#### (a)
-BPSK should be used since it is the only scheme with BER less than 10^{-6} when SNR is 12. 
+### 4. SINR of C at D
+#### (a) noise power at D = 0
+
+According to the *decreased signal strength* formula from course, 
+$$
+p_{R_X} = \alpha *\frac{P_{T_x}}{d^2}
+$$
+
+
+Suppose the received signal power at D is P, 
+
+- then the inference from A at D is $\frac{P}{3^2}=\frac{P}{9}$.
+
+  Then by formula: $SINR=\frac{P}{P/9}=9$.
+
 #### (b)
-Since BPSK transfers 1 bit per symbol, the bit rate = bandwidth * bits/symbol = 10MHz * 1 = 10Mbps.
+Suppose the received signal power at D is P, then the noise power at D is P/18
+
+
+
+$SINR=\frac{P}{P/18}=18$.
+
+### 5. BER vs SNR curve
+#### (a)
+BPSK should be used since it is the only scheme with BER less than $10^{-6}$ when SNR is 12. 
+#### (b)
+Since BPSK transfers 1 bit per symbol,  the bit rate = bandwidth * bits/symbol = 10MHz * 1 = 10Mbps.
 #### (c)
-When SNR = 12dB, BER = 10^{-8}. A packet is receive correctly only if no bit is in error, the probability is $(1-10^{-8})^{1500}= 0.9817$. So the probability of packet loss is 1-0.9817=0.02283
+When SNR = 12dB, BER = $10^{-8}$. A packet is receive correctly only if no bit is in error, the probability is $(1-10^{-8})^{1500}= 0.9817$. So the probability of packet loss is $ 1-0.9817=0.0183$
