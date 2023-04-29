@@ -67,22 +67,30 @@ Z: X, Z
 
 ![image-20230427210107821](./CS438_Assignment_4.assets/image-20230427210107821.png)
 
-### 1. 
-Matching rule: (source ip = 10.1.0.2 or source ip = 10.3.0.5) and dest ip = 10.2.0.3
-Action: forward to 3
-Matching rule: (source ip = 10.1.0.2 or source ip = 10.3.0.5) and dest ip = 10.2.0.4
-Action: forward to 4
-### 2. 
-Matching rule: TCP and dest ip = 10.2.0.3
-Action: forward to 3
-Matching rule: TCP and dest ip = 10.2.0.4
-Action: forward to 4
-### 3. 
-Matching rule: dest ip = 10.2.0.4
-Action: forward to 4
-### 4. 
-Matching rule: source ip = 10.3.0.6 and source ip = 10.3.0.5 and dest ip = 10.2.0.3
-Action: forward to 3
+### 1. h2&h5 to h3&h4
+- Matching rule: if (source ip = 10.1.0.2 or 10.3.0.5) and destination ip = 10.2.0.3
+
+  - Action: forward to h3
+  - Else: drop
+
+- Matching rule: if (source ip = 10.1.0.2 or 10.3.0.5) and destination ip = 10.2.0.4
+  - Action: forward to h4
+  - Else: drop
+
+### 2. Only TCP to h3&h4
+- Matching rule:  IP protocol attribute is TCP and destination ip = 10.2.0.3
+  - Action: forward(h3)
+- Matching rule:  IP protocol attribute is TCP and destination ip = 10.2.0.4
+  - Action: forward(h4)
+
+### 3. Block h3 only
+- Matching rule: if destination ip = 10.2.0.4
+  - Action: forward(h4)
+
+### 4. h6-UDP-h3 only
+- Matching rule: 
+  - source ip = 10.3.0.6 , destination ip = 10.2.0.3 and  P protocol attribute is UDP
+  - Action: forward(h3)
 
 
 
@@ -108,33 +116,33 @@ Action: forward to 3
 
 #### (b) 4+4 +1 = 9
 
-#### (c) array:
+#### (c) & (d)array:
 
-#### (d)
-In this example, the first, second and fifth bits are flipped, but the parity bits remain the same, so two-dimensional parity cannot detect the 3 errors.
+#### 
+
+<img src="./CS438_Assignment_4.assets/image-20230429160825471.png" alt="image-20230429160825471" style="zoom:33%;" />
+
 #### (e)
 
-- Advantage: 2D parity can self-detect and correct single-bit errors. It is more powerful
+- **Advantage:** 2D parity can self-detect and correct single-bit errors. It is more powerful
 
-- Disadvantage: 2D parity requires more parity bits, increasing the overhead and space complexity
+- **Disadvantage:** 2D parity requires more parity bits, increasing the overhead and space complexity
 
-
-
-### 2. CRC
+### 2. Cyclic Redundancy Checksum
 
 ![image-20230427213527407](./CS438_Assignment_4.assets/image-20230427213527407.png)
 
 #### (a) Shown below:
 
-TODO
+<img src="./CS438_Assignment_4.assets/image-20230429170118420.png" alt="image-20230429170118420" style="zoom: 50%;" />
 
-#### (b) 1110011 10001001 11001110
-
+#### (b) 1111 0011 1000 1001 1100 1110
+"1111 0011 1000 1001" + 8 CRC bit
 #### (c) The receiver divides the received bit stream <D,R> by G using modulo 2 long division. If the remainder is not zero, error is detected.
 
 #### (d) Shown below
 
-
+<img src="./CS438_Assignment_4.assets/image-20230429170530960.png" alt="image-20230429170530960" style="zoom:67%;" />
 
 
 
@@ -142,16 +150,23 @@ TODO
 
 ![image-20230427213806999](./CS438_Assignment_4.assets/image-20230427213806999.png)
 
-0x7EFF=0111 1110 1111 1111
-0xAAC8=1010 1010 1100 1000
-0xEC05=1110 1100 0000 0101
-0x7EFF+0xAAC8=1 0010 1001 1100 0111
-Wrap around: 0x7EFF+0xAAC8=0010 1001 1100 1000
-0x7EFF+0xAAC8+0xEC05=1 0001 0101 1100 1101
-Wrap around: 0x7EFF+0xAAC8+0xEC05=0001 0101 1100 1110
-1’s complement sum=1110 1010 0011 0001.
+0x7EFF = 0111 1110 1111 1111
+0xAAC8 = 1010 1010 1100 1000
+0xEC05 = 1110 1100 0000 0101
+0x7EFF + 0xAAC8 = 1 0010 1001 1100 0111
+**Wrap around:** 
 
-## 5. 
+0x7EFF+0xAAC8= 0010 1001 1100 1000
+0x7EFF+0xAAC8+0xEC05=1 0001 0101 1100 1101
+**Wrap around:** 
+
+0x7EFF+0xAAC8+0xEC05=0001 0101 1100 1110
+
+**1’s complement sum ** =1110 1010 0011 0001
+
+## 5. Channel Contention
+
+<img src="./CS438_Assignment_4.assets/image-20230429171213856.png" alt="image-20230429171213856" style="zoom: 67%;" />
 
 
 ### 1.
@@ -187,7 +202,29 @@ The total probability is $\frac{7}{32}+\frac{6}{32}+\frac{5}{32}+\frac{4}{32}=\f
 
 ## 6. Wireless
 
-### 1. 
+<img src="./CS438_Assignment_4.assets/image-20230429172318156.png" alt="image-20230429172318156" style="zoom:67%;" />
+
+### 1. Hidden Terminals 
+
 F(A)B, A(B)C, B(C)D, E(A)B
 
-### 2.
+### 2. Collision Avoidance 
+No, because F or E may be sending to A at the same time, and a collision will occur.
+
+### 3. ACK is necessary
+For wireless network, there might be a lot of inferences to the signal. Node A sends an ACK message to confirm that it has successfully received the packet. If node B doesn't receive an ACK message within a certain timeframe, it will assume that the packet is lost and resend the packet. So it is necessary to send an ACK message to ensure reliable wireless transfer.
+
+### 4.
+#### (a)
+Suppose the received signal power at D is P, then the inference from A at D is $\frac{P}{3^2}=\frac{P}{9}$.
+$SINR=\frac{P}{P/9}=9$.
+#### (b)
+Suppose the received signal power at D is P, then the noise power at D is P/18.$SINR=\frac{P}{P/18}=18$.
+
+### 5.
+#### (a)
+BPSK should be used since it is the only scheme with BER less than 10^{-6} when SNR is 12. 
+#### (b)
+Since BPSK transfers 1 bit per symbol, the bit rate = bandwidth * bits/symbol = 10MHz * 1 = 10Mbps.
+#### (c)
+When SNR = 12dB, BER = 10^{-8}. A packet is receive correctly only if no bit is in error, the probability is $(1-10^{-8})^{1500}= 0.9817$. So the probability of packet loss is 1-0.9817=0.02283
