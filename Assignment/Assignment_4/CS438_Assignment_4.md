@@ -67,6 +67,14 @@ Z: X, Z
 
 ![image-20230427210107821](./CS438_Assignment_4.assets/image-20230427210107821.png)
 
+Referring to  [Openflow docs](https://opennetworking.org/wp-content/uploads/2013/04/openflow-spec-v1.0.0.pdf): we need to specify:
+
+- **nw_proto**: where 6 denotes TCP, 17 denotes UDP
+- **nw_src**
+- **nw_dst** 
+
+In the matching rule
+
 ### 1. h2&h5 to h3&h4
 - Matching rule: if (source ip = 10.1.0.2 or 10.3.0.5) and destination ip = 10.2.0.3
 
@@ -79,9 +87,13 @@ Z: X, Z
 
 ### 2. Only TCP to h3&h4
 - Matching rule:  IP protocol attribute is TCP and destination ip = 10.2.0.3
+  - if ( nw_proto == 6 && nw_dst == 10.2.0.3)
   - Action: forward(h3)
+  
 - Matching rule:  IP protocol attribute is TCP and destination ip = 10.2.0.4
+  - if ( nw_proto == 6 && nw_dst == 10.2.0.4)
   - Action: forward(h4)
+
 
 ### 3. Block h3 only
 - Matching rule: if destination ip = 10.2.0.4
@@ -90,11 +102,14 @@ Z: X, Z
 ### 4. h6-UDP-h3 only
 - Matching rule: 
   - source ip = 10.3.0.6 , destination ip = 10.2.0.3 and  P protocol attribute is UDP
+  - if ( nw_proto == 17 && nw_src  == 10.3.0.6 && nw_dst == 10.2.0.3)
   - Action: forward(h3)
 
 
 
-
+> Citation:
+>
+> [Campuswire:  TCP or UDP would be specified by the IP prot, or nw_proto](https://campuswire.com/c/G8B863314/feed/1076)
 
 ## 3. Synthesis
 
