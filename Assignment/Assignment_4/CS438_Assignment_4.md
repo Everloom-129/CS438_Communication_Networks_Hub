@@ -9,9 +9,9 @@
 
 ## 1. BGP Policy
 
-![image-20230427205902434](./CS438_Assignment_4.assets/image-20230427205902434.png)
+<img src="./CS438_Assignment_4.assets/image-20230427205902434.png" alt="image-20230427205902434" style="zoom:67%;" />
 
-![image-20230427210005765](./CS438_Assignment_4.assets/image-20230427210005765.png)
+<img src="./CS438_Assignment_4.assets/image-20230427210005765.png" alt="image-20230427210005765" style="zoom: 50%;" />
 
 ### 1. ASes to X:
 
@@ -61,9 +61,9 @@ Z: X, Z
 
 ## 2. SDNs
 
-![image-20230427210030857](./CS438_Assignment_4.assets/image-20230427210030857.png)
+<img src="./CS438_Assignment_4.assets/image-20230427210030857.png" alt="image-20230427210030857" style="zoom:67%;" />
 
-![image-20230427210043711](./CS438_Assignment_4.assets/image-20230427210043711.png)
+<img src="./CS438_Assignment_4.assets/image-20230427210043711.png" alt="image-20230427210043711" style="zoom:50%;" />
 
 ![image-20230427210107821](./CS438_Assignment_4.assets/image-20230427210107821.png)
 
@@ -94,7 +94,6 @@ In the matching rule
   - if ( nw_proto == 6 && nw_dst == 10.2.0.4)
   - Action: forward(h4)
 
-
 ### 3. Block h3 only
 - Matching rule: if destination ip = 10.2.0.4
   - Action: forward(h4)
@@ -113,7 +112,7 @@ In the matching rule
 
 ## 3. Synthesis
 
-![image-20230429152238209](./CS438_Assignment_4.assets/image-20230429152238209.png)
+<img src="./CS438_Assignment_4.assets/image-20230429152238209.png" alt="image-20230429152238209" style="zoom:67%;" />
 
 ![image-20230429152537556](./CS438_Assignment_4.assets/image-20230429152537556.png)
 
@@ -123,7 +122,7 @@ In the matching rule
 
 ## 4. Error Detection
 
-![image-20230427213055209](./CS438_Assignment_4.assets/image-20230427213055209.png)
+<img src="./CS438_Assignment_4.assets/image-20230427213055209.png" alt="image-20230427213055209" style="zoom:50%;" />
 
 ### 1. Parity Check 
 
@@ -145,7 +144,7 @@ In the matching rule
 
 ### 2. Cyclic Redundancy Checksum
 
-![image-20230427213527407](./CS438_Assignment_4.assets/image-20230427213527407.png)
+<img src="./CS438_Assignment_4.assets/image-20230427213527407.png" alt="image-20230427213527407" style="zoom:50%;" />
 
 #### (a) Shown below:
 
@@ -163,7 +162,7 @@ In the matching rule
 
 ### 3. Checksum
 
-![image-20230427213806999](./CS438_Assignment_4.assets/image-20230427213806999.png)
+<img src="./CS438_Assignment_4.assets/image-20230427213806999.png" alt="image-20230427213806999" style="zoom:50%;" />
 
 0x7EFF = 0111 1110 1111 1111
 0xAAC8 = 1010 1010 1100 1000
@@ -217,7 +216,7 @@ The total probability is $\frac{7}{32}+\frac{6}{32}+\frac{5}{32}+\frac{4}{32}=\f
 
 ## 6. Wireless
 
-<img src="./CS438_Assignment_4.assets/image-20230429172318156.png" alt="image-20230429172318156" style="zoom:67%;" />
+<img src="./CS438_Assignment_4.assets/image-20230429172318156.png" alt="image-20230429172318156" style="zoom: 50%;" />
 
 ### 1. Hidden Terminals 
 
