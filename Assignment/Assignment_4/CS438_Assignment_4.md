@@ -9,9 +9,9 @@
 
 ## 1. BGP Policy
 
-<img src="./CS438_Assignment_4.assets/image-20230427205902434.png" alt="image-20230427205902434" style="zoom:67%;" />
+<img src="./CS438_Assignment_4.assets/image-20230427205902434.png" alt="image-20230427205902434" style="zoom:50%;" />
 
-<img src="./CS438_Assignment_4.assets/image-20230427210005765.png" alt="image-20230427210005765" style="zoom: 50%;" />
+<img src="./CS438_Assignment_4.assets/image-20230427210005765.png" alt="image-20230427210005765" style="zoom: 30%;" />
 
 ### 1. ASes to X:
 
@@ -56,16 +56,16 @@ Z: X, Z
 
 
 
-
+<div STYLE="page-break-after: always;"></div>
 
 
 ## 2. SDNs
 
 <img src="./CS438_Assignment_4.assets/image-20230427210030857.png" alt="image-20230427210030857" style="zoom:67%;" />
 
-<img src="./CS438_Assignment_4.assets/image-20230427210043711.png" alt="image-20230427210043711" style="zoom:50%;" />
+<img src="./CS438_Assignment_4.assets/image-20230427210043711.png" alt="image-20230427210043711" style="zoom:30%;" />
 
-![image-20230427210107821](./CS438_Assignment_4.assets/image-20230427210107821.png)
+<img src="./CS438_Assignment_4.assets/image-20230427210107821.png" alt="image-20230427210107821" style="zoom:50%;" />
 
 Referring to  [Openflow docs](https://opennetworking.org/wp-content/uploads/2013/04/openflow-spec-v1.0.0.pdf): we need to specify:
 
@@ -110,15 +110,15 @@ In the matching rule
 >
 > [Campuswire:  TCP or UDP would be specified by the IP prot, or nw_proto](https://campuswire.com/c/G8B863314/feed/1076)
 
+<div STYLE="page-break-after: always;"></div>
+
 ## 3. Synthesis
 
-<img src="./CS438_Assignment_4.assets/image-20230429152238209.png" alt="image-20230429152238209" style="zoom:67%;" />
+<img src="./CS438_Assignment_4.assets/image-20230429152537556.png" alt="image-20230429152537556" style="zoom:80%;" />
 
-![image-20230429152537556](./CS438_Assignment_4.assets/image-20230429152537556.png)
+<img src="./CS438_Assignment_4.assets/image-20230429152626911.png" alt="image-20230429152626911" style="zoom:80%;" />
 
-![image-20230429152626911](./CS438_Assignment_4.assets/image-20230429152626911.png)
-
-
+<div STYLE="page-break-after: always;"></div>
 
 ## 4. Error Detection
 
@@ -156,13 +156,11 @@ In the matching rule
 
 #### (d) Shown below
 
-<img src="./CS438_Assignment_4.assets/image-20230429170530960.png" alt="image-20230429170530960" style="zoom:67%;" />
+<img src="./CS438_Assignment_4.assets/image-20230429170530960.png" alt="image-20230429170530960" style="zoom:50%;" />
 
 
 
 ### 3. Checksum
-
-<img src="./CS438_Assignment_4.assets/image-20230427213806999.png" alt="image-20230427213806999" style="zoom:50%;" />
 
 0x7EFF = 0111 1110 1111 1111
 0xAAC8 = 1010 1010 1100 1000
@@ -178,12 +176,14 @@ In the matching rule
 
 **1’s complement sum ** =1110 1010 0011 0001
 
+<div STYLE="page-break-after: always;"></div>
+
 ## 5. Channel Contention
 
 <img src="./CS438_Assignment_4.assets/image-20230429171213856.png" alt="image-20230429171213856" style="zoom: 67%;" />
 
 
-### 1.
+### 1. 
 At round i, each node can wait $0, 1, …, 2^{(i-1)}-1$ slots, all $ 2^{i-1}$ choices having $\frac{1}{2^{i-1}} $ probability.
 A collision happens in i-th round if A and B both choose to wait k slots, where $k=0, 1, …, 2^{i-1}-1$, the probability is $ 2^{i-1}*\frac{1}{2^{i-1}}*\frac{1}{2^{i-1}}=\frac{1}{2^{i-1}} $.
 
@@ -212,7 +212,7 @@ The total probability is $\frac{7}{32}+\frac{6}{32}+\frac{5}{32}+\frac{4}{32}=\f
 
 
 
-
+<div STYLE="page-break-after: always;"></div>
 
 ## 6. Wireless
 
@@ -223,7 +223,7 @@ The total probability is $\frac{7}{32}+\frac{6}{32}+\frac{5}{32}+\frac{4}{32}=\f
 F(A)B, A(B)C, B(C)D, E(A)B
 
 ### 2. Collision Avoidance 
-No, because F or E may be sending to A at the same time, and a collision will occur.
+No, because F or E may be send RTS to A at the same time, and a collision will occur.
 
 ### 3. ACK is necessary
 For wireless network, the unstable environment causes a lot of inferences to the signal. 
@@ -245,19 +245,23 @@ Suppose the received signal power at D is P,
 
 - then the inference from A at D is $\frac{P}{3^2}=\frac{P}{9}$.
 
-  Then by formula: $SINR=\frac{P}{P/9}=9$.
+  Then by formula above, $SINR=\frac{P}{P/9}=9$.
 
 #### (b)
 Suppose the received signal power at D is P, then the noise power at D is P/18
 
-
-
-$SINR=\frac{P}{P/18}=18$.
+then, $SINR=P \div (P/18+P/9)= 6$
 
 ### 5. BER vs SNR curve
-#### (a)
+#### (a) SNR = 12dB, which modulation scheme maximize bit rate?
 BPSK should be used since it is the only scheme with BER less than $10^{-6}$ when SNR is 12. 
-#### (b)
-Since BPSK transfers 1 bit per symbol,  the bit rate = bandwidth * bits/symbol = 10MHz * 1 = 10Mbps.
+#### (b) If bandwidth = 10Mhz, bit rate = ? under (a)
+Since BPSK transfers 1 bit per symbol,  
+
+the bit rate = bandwidth * bits/symbol = 10MHz * 1 = **10Mbps**
+
 #### (c)
-When SNR = 12dB, BER = $10^{-8}$. A packet is receive correctly only if no bit is in error, the probability is $(1-10^{-8})^{1500}= 0.9817$. So the probability of packet loss is $ 1-0.9817=0.0183$
+When SNR = 12dB, BER = $10^{-8}$. 
+
+- A packet is receive correctly only if no bit is in error, the probability is $(1-10^{-8})^{1500}= 0.9817$. 
+- So the probability of packet loss is $ 1-0.9817=0.0183$
