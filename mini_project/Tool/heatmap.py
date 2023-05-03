@@ -23,7 +23,8 @@ def generate_heatmap(data, x_points, y_points):
 
 def main():
     print("generating the heatmap...")
-    create_heatmap("raw_data//raw_data.csv", "floor_plan\Siebel-Floor-Plan-1.jpg", "heatmap\h1.png")
+    # todo: "test_coord.csv" for coordinates we want to test
+    create_heatmap("raw_data//raw_data.csv", "floor_plan\Siebel-Floor-Plan-1.jpg", "heatmap\h1.png", "test_coord.csv")
 
     # # Read the preprocessed data CSV file
     # preprocessed_data_file = "preprocessed_data.csv"
@@ -57,16 +58,18 @@ def main():
     # plt.show()
 
 
-def create_heatmap(raw_data_path, floor_plan_path, heatmap_path):
+def create_heatmap(raw_data_path, floor_plan_path, heatmap_path, test_coord_path):
     # Load Wi-Fi data
     wifi_data = pd.read_csv(raw_data_path)
-
+    test_coord = pd.read_csv(test_coord_path)
+    
     # Calculate grid size based on the number of unique latitude and longitude values
     num_lat = len(wifi_data['Latitude'].unique())
     num_lon = len(wifi_data['Longitude'].unique())
 
     # Create an empty grid for the heatmap
     heatmap_data = np.zeros((num_lat, num_lon))
+
 
     # Fill the heatmap grid with signal strength data
     for index, row in wifi_data.iterrows():
