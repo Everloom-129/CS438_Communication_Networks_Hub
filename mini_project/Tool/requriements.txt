@@ -1,0 +1,11 @@
+numpy>=1.15
+pywifi
+csv
+time
+sys
+os
+pandas
+matplotlib
+scipy
+seaborn
+PIL

@@ -22,21 +22,21 @@ def main():
     data = data.dropna()
     data = remove_outliers(data, 'Signal Strength', threshold=2)
 
-    # Calculate the average signal strength for each BSSID and the number of unique BSSIDs for each SSID
-    bssid_stats = data.groupby(['SSID', 'BSSID'])['Signal Strength'].agg(['mean', 'count']).reset_index()
+    # # Calculate the average signal strength for each BSSID and the number of unique BSSIDs for each SSID
+    # bssid_stats = data.groupby(['SSID', 'BSSID'])['Signal Strength'].agg(['mean', 'count']).reset_index()
     
-    # Compare the average signal strength and number of unique BSSIDs between the two SSIDs
-    ssid_comparison = bssid_stats.groupby('SSID').agg({'BSSID': 'count', 'mean': 'mean'})
+    # # Compare the average signal strength and number of unique BSSIDs between the two SSIDs
+    # ssid_comparison = bssid_stats.groupby('SSID').agg({'BSSID': 'count', 'mean': 'mean'})
 
-    # Save the BSSID statistics to a new CSV file
-    bssid_stats_file = network_stats_file
-    bssid_stats.to_csv(bssid_stats_file, index=False)
-    print(f"BSSID statistics saved to {bssid_stats_file}")
+    # # Save the BSSID statistics to a new CSV file
+    # bssid_stats_file = network_stats_file
+    # bssid_stats.to_csv(bssid_stats_file, index=False)
+    # print(f"BSSID statistics saved to {bssid_stats_file}")
 
-    # Save the SSID comparison to a new CSV file
-    ssid_comparison_file = "ssid_comparison.csv"
-    ssid_comparison.to_csv(ssid_comparison_file, index=True)
-    print(f"SSID comparison saved to {ssid_comparison_file}")
+    # # Save the SSID comparison to a new CSV file
+    # ssid_comparison_file = "ssid_comparison.csv"
+    # ssid_comparison.to_csv(ssid_comparison_file, index=True)
+    # print(f"SSID comparison saved to {ssid_comparison_file}")
 
 if __name__ == "__main__":
     main()
