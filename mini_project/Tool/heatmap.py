@@ -6,9 +6,12 @@ import seaborn as sns
 from PIL import Image
 
 def generate_heatmap(data, x_points, y_points):
+    if data.empty:
+        print("Error: No data points found. Please ensure the input file has valid data.")
+        return None, None, None
     x = data['x']
     y = data['y']
-    signal_strength = data['Signal_Strength']
+    signal_strength = data['Signal Strength']
 
     # Create a grid of points for the entire floor plan
     X, Y = np.meshgrid(x_points, y_points)
@@ -19,14 +22,25 @@ def generate_heatmap(data, x_points, y_points):
 
     return X, Y, Z
 
+
 def main():
     # Read the raw data CSV file
+    # raw_data_file = "raw_data\illinois_net_raw_data.csv"
     raw_data_file = "raw_data.csv"
+    
     data = pd.read_csv(raw_data_file)
+    floor_plan_path = "AP_info\F1.png"
+    # Load the floor plan image using PIL (Python Imaging Library)
+    floor_plan_image = Image.open(floor_plan_path)
+    floor_plan_array = np.array(floor_plan_image)
+
+    # Create a new figure and axis
+    fig, ax = plt.subplots()
 
     # Define the dimensions of the floor plan
-    floor_width = 100
-    floor_height = 100
+    floor_width, floor_height = floor_plan_image.size
+    aspect_ratio = floor_width / floor_height
+
 
     # Define the resolution of the heatmap
     resolution = 1
@@ -37,24 +51,24 @@ def main():
 
     # Generate the heatmap
     X, Y, Z = generate_heatmap(data, x_points, y_points)
-
-    # Load the floor plan image using PIL (Python Imaging Library)
-    floor_plan_path = "AP_info\F1.png"
-    floor_plan_image = Image.open(floor_plan_path)
-    floor_plan_array = np.array(floor_plan_image)
-
-    # Create a new figure and axis
-    fig, ax = plt.subplots()
+    print("X,Y,Z : ",X,Y,Z)
+    # Check if heatmap data is generated
+    if X is None or Y is None or Z is None:
+        print("Heatmap not generated due to empty data.")
+        return
 
     # Display the floor plan image on the axis
     ax.imshow(floor_plan_array, extent=[0, floor_width, 0, floor_height], aspect='auto')
 
     # Plot the heatmap on top of the floor plan image
-    heatmap = ax.imshow(Z, cmap='coolwarm', alpha=0.5, origin='lower', extent=[0, floor_width, 0, floor_height], aspect='auto')
-    plt.colorbar(heatmap, label='Signal Strength')
+    heatmap = ax.imshow(Z, cmap='coolwarm', alpha=0.5, origin='upper', extent=[0, floor_width, 0, floor_height], aspect='auto')
+    plt.colorbar(heatmap, label='Signal_Strength')
     plt.title('Wi-Fi Network Heatmap')
     plt.xlabel('X Coordinate')
     plt.ylabel('Y Coordinate')
+
+    # Invert the Y-axis to make (0, 0) be the top-left corner
+    ax.invert_yaxis()
 
     # Save the heatmap to a file
     heatmap_path = "heatmap\heatmap_F1.png"

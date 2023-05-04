@@ -18,7 +18,10 @@ def scan_wifi(interface):
         bssid = network.bssid[:-1]
 
         signal_strength = network.signal
+        
         current = 1 if (current_BSSID==bssid) else 0
+        if( current == 1 ):
+            print("=== ONE exists") 
         wifi_data.append([ssid, bssid, signal_strength, current])
         # print(f"SSID: {ssid}, BSSID: {bssid}, Signal Strength: {signal_strength} dBm, current_bssid: {current}")
 
@@ -68,7 +71,7 @@ def main():
 
     print(f"Scanning Wi-Fi networks on interface {interface.name()}")
 
-    with open("raw_data//raw_data.csv", mode="w", newline="") as csv_file:
+    with open("raw_data//illinois_net_raw_data.csv", mode="w", newline="") as csv_file:
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow(["SSID", "BSSID", "Signal Strength", "current BSSID", "x", "y"])
         
@@ -78,7 +81,7 @@ def main():
             for i in range(test_times):
                 wifi_data = scan_wifi(interface)
                 for data in wifi_data:
-                    if data[0] == "IllinoisNet" :# data[0] != "eduroam":
+                    if data[0] == "IllinoisNet" or data[0] == "eduroam":
                         csv_writer.writerow(data + [x,y])
                 time.sleep(5)  # Wait for 5 seconds before scanning again
 

@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import numpy as np
 from PIL import Image
+import sys
 
 def show_image_with_grid(image_path, grid_spacing_x=50, grid_spacing_y=50, output_folder='heatmap'):
     # Load the image using PIL (Python Imaging Library)
@@ -46,13 +47,17 @@ def main():
         "AP_info\F3.png",
         "AP_info\F4.png",
     ]
-
-    # selected_floor = int(input("Enter the floor number to be printed (0-4): "))
-    # if 0 <= selected_floor < len(image_list):
-    selected_floor = 0
-    while selected_floor <5:
+    if len(sys.argv) >= 2:
+        selected_floor = int(sys.argv[1])
+    else:
+        selected_floor = int(input("Enter the floor number to be printed (0-4): "))
+    if 0 <= selected_floor < len(image_list):
         show_image_with_grid(image_list[selected_floor])
-        selected_floor += 1
+        
+    # selected_floor = 0
+    # while selected_floor <5:
+    #     show_image_with_grid(image_list[selected_floor])
+    #     selected_floor += 1
 
 if __name__ == "__main__":
     main()
