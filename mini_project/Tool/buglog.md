@@ -29,6 +29,9 @@ Solution:
     We handle this difference in Data_preprocessing.py
 
 ## Data_preprocessing
+
+1st floor: wap-0563-20 to wap-0563-58
+
 To do:
  
 <--------------------------------------------------------->
