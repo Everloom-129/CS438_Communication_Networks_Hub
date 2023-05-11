@@ -6,6 +6,10 @@ import subprocess
 import re
 from pywifi import const
 
+# TODO laplace smoothing
+NumberOfScan = 3 # Take median of each scanning to smooth output
+TestPoint    = 5 # Test point used for running program once
+
 def scan_wifi(interface):
     interface.scan()
     time.sleep(3)  # Give some time for the scan to complete
@@ -47,7 +51,6 @@ def get_BSSID():
 def get_current_coordinate():
     # Add a function to get test point (x, y) by manually input
     x,y = input("Enter the xy-coordinate of the test point: ").split(",")
-    # Return the coordinates as a tuple
     return int(x), int(y)
 
 def main():
@@ -69,19 +72,31 @@ def main():
 
     print(f"Scanning Wi-Fi networks on interface {interface.name()}")
 
+    raw_data_file = "raw_data//illinois_net_raw_data.csv"
+
+    # Check if the file exists, and if not, create it with headers
+    try:
+        with open(raw_data_file, "x", newline="") as csv_file:
+            csv_writer = csv.writer(csv_file)
+            csv_writer.writerow(["SSID", "BSSID", "Signal Strength", "current BSSID", "x", "y"])
+    except FileExistsError:
+        pass  # The file already exists, no need to write headers
+
+
+
     with open("raw_data//illinois_net_raw_data.csv", mode="a", newline="") as csv_file:
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow(["SSID", "BSSID", "Signal Strength", "current BSSID", "x", "y"])
         
-        for _ in range(5):# test five points
-            test_times = 1
+        for _ in range(TestPoint):# test five points
+            test_times = NumberOfScan
             x,y = get_current_coordinate()
             for i in range(test_times):
                 wifi_data = scan_wifi(interface)
                 for data in wifi_data:
                     if data[0] == "IllinoisNet" or data[0] == "eduroam":
                         csv_writer.writerow(data + [x,y])
-                time.sleep(5)  # Wait for 5 seconds before scanning again
+                time.sleep(3)  # Wait for 5 seconds before scanning again
 
 
     
