@@ -2,6 +2,20 @@
 Wang,Jie
 Wu,Jiaxin
 
+## Coordinate Generation
+<--------------------------------------------------------->
+                          BUG 0                          
+<--------------------------------------------------------->
+Time:
+    2022.05.07.
+Creator:
+    Jie Wang.
+Description:
+    The ap info floor plan naming is incorrect, after checking the floor plan, we recert them.
+Solution:
+    
+
+
 ## Data_collection
 To do:
 Mark test locations on the map, then put the coordinates in a csv.

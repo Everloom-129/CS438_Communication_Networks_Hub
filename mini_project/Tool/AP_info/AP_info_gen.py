@@ -6,6 +6,7 @@ data = []
 AP_range = [(1,19),(20,58),(59,98),(99,135),(135,171)]
 for i in sheet.index.values:
     row_data = sheet.loc[i,['Access_Point_Name','Wired_MAC_Address','BSSID_MAC','SSID_2.4_and_5']].to_dict()
+    row_data = sheet.loc[i,['Access_Point_Name','Wired_MAC_Address','BSSID_MAC','SSID_2.4_and_5']].to_dict()
 
     data.append(row_data)
 if (floor == "all"):

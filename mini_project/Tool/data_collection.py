@@ -53,7 +53,7 @@ def bssid_to_ap_name(bssid):
     bssid_map = {}
 
     # Read the "AP_info.csv" file and create a dictionary mapping BSSIDs to Access Point names
-    with open("AP_info\\AP_info_L3.csv", mode="r") as csv_file:
+    with open("AP_info\\AP_info_all.csv", mode="r") as csv_file:
         csv_reader = csv.reader(csv_file)
         for row in csv_reader:
             if len(row) < 3:
