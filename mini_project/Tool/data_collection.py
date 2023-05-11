@@ -7,8 +7,8 @@ import re
 from pywifi import const
 
 # TODO laplace smoothing
-NumberOfScan = 1 # Take median of each scanning to smooth output
-TestPoint    = 1 # Test point used for running program once
+NumberOfScan = 3 # Take median of each scanning to smooth output
+TestPoint    = 5 # Test point used for running program once
 
 def scan_wifi(interface):
     interface.scan()
@@ -53,7 +53,7 @@ def bssid_to_ap_name(bssid):
     bssid_map = {}
 
     # Read the "AP_info.csv" file and create a dictionary mapping BSSIDs to Access Point names
-    with open("AP_info\\AP_info.csv", mode="r") as csv_file:
+    with open("AP_info\\AP_info_L3.csv", mode="r") as csv_file:
         csv_reader = csv.reader(csv_file)
         for row in csv_reader:
             if len(row) < 3:
