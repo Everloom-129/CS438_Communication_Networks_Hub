@@ -20504,3 +20504,4 @@ eduroam,44:12:44:6d:9b:41,-77,0,542,588
 eduroam,44:12:44:6d:16:e1,-71,0,542,588
 eduroam,44:12:44:6e:07:71,-68,0,542,588
 eduroam,44:12:44:6d:82:f1,-75,0,542,588
+SSID,BSSID,Signal Strength,current BSSID,x,y
