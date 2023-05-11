@@ -9,7 +9,7 @@ from pywifi import const
 # TODO laplace smoothing
 NumberOfScan = 3 # Take median of each scanning to smooth output
 TestPoint    = 5 # Test point used for running program once
-input_data_path = "raw_data//eduroam_raw_data_1L.csv"
+input_data_path = "raw_data//" + "illinois" + "_raw_data_"+ "L3.csv" # eduroam or illinois
 
 def scan_wifi(interface):
     interface.scan()

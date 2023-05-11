@@ -1,11 +1,12 @@
 import pandas as pd
 import numpy as np
 import sys
+import data_collection as dc
 
-# we turn off one of the panda warning to avoid annoying buggy words
-# the index method we take don't harm to the data integrity 
-# pd.options.mode.chained_assignment = None
-
+# Global path variable
+default_info_path = "AP_info/AP_info_" + "L1.csv"
+raw_data_path = "raw_data/" + "eduroam" + "_raw_data_" + "1L.csv"
+preprocessed_path = "preprocessed_data/preprocessed_mean.csv"
 
 def remove_outliers(data, column, threshold=2):
     mean = np.mean(data[column])
@@ -31,30 +32,33 @@ def single_ap(data, bssid):
     filtered_df['Signal Strength'] = pd.to_numeric(filtered_df['Signal Strength'])
     mean_signal = filtered_df.groupby(['x', 'y'], as_index=False)['Signal Strength'].transform('mean')
     filtered_df['Signal Strength'] = mean_signal
-    return filtered_df.drop_duplicates()
+
+    bssid_filename = bssid.replace(":", "-")
+    bssid_data = filtered_df.drop_duplicates()
+    bssid_data.to_csv(f"preprocessed_data/{bssid_filename}.csv", index = False)
+    return
 
 
 
 def main():
     if len(sys.argv) > 2:
         data_file = sys.argv[1]
-        network_stats_file = sys.argv[2]
+        AP_info_path = sys.argv[2]
     else:
-        data_file = "raw_data/illinois_net_raw_data.csv"
+        AP_info_path = default_info_path
+        data_file = raw_data_path
     data = pd.read_csv(data_file)
 
     data = data.dropna()
     # data = remove_outliers(data, 'Signal Strength', threshold=2)
     mean_data = keep_current_mean(data)
     
-    BSSID_data = pd.read_csv("AP_info/AP_info.csv")["BSSID MAC"]
+    BSSID_data = pd.read_csv(AP_info_path)["BSSID MAC"]
     for bssid in BSSID_data:
-        bssid_data = single_ap(data, bssid)
-        bssid_filename = bssid.replace(":", "_")
-        bssid_data.to_csv(f"raw_data/{bssid_filename}.csv", index = False)
+        single_ap(data, bssid)
 
     try:
-        mean_data.to_csv("raw_data/preprocessed_mean.csv", index=False)
+        mean_data.to_csv(preprocessed_path, index=False)
     except:
         print("failed to save to file")
 

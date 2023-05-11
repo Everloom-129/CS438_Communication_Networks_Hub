@@ -6,6 +6,11 @@ import seaborn as sns
 from PIL import Image
 import sys
 
+floor_plan_path     = "AP_info\F1.png"
+default_data_path   = "preprocessed_data\preprocessed_mean.csv"
+default_output_path = "heatmap\heatmap_F1.png"
+
+
 def generate_heatmap(data, x_points, y_points):
     if data.empty:
         print("Error: No data points found. Please ensure the input file has valid data.")
@@ -28,14 +33,14 @@ def main():
     # Read the raw data CSV file
     if len(sys.argv) == 2:
         bssid = sys.argv[1]
-        raw_data_file = f"raw_data\{bssid}.csv"
+        mac_data_file = f"preprocessed_data\{bssid}.csv"
         heatmap_path = f"heatmap\heatmap_{bssid}.png"
     else:
-        raw_data_file = "raw_data\preprocessed.csv"
-        heatmap_path = "heatmap\heatmap_F1.png"
+        mac_data_file = default_data_path
+        heatmap_path = default_output_path
     
-    data = pd.read_csv(raw_data_file)
-    floor_plan_path = "AP_info\F1.png"
+    data = pd.read_csv(mac_data_file)
+    
     # Load the floor plan image using PIL (Python Imaging Library)
     floor_plan_image = Image.open(floor_plan_path)
     floor_plan_array = np.array(floor_plan_image)

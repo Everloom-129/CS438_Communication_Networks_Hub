@@ -76,7 +76,7 @@ To minimize fluctuations in signal strength, you can try taking multiple measure
 1st floor: wap-0563-20 to wap-0563-58
 
 To do:
- 
+
 <--------------------------------------------------------->
                           BUG 1                          
 <--------------------------------------------------------->
@@ -98,5 +98,15 @@ Solution:
 - Image reversed 
     x = n - x?
 - data coordinate 
-- 
-## 
+- ## 
+
+<--------------------------------------------------------->
+                          BUG 1                          
+<--------------------------------------------------------->
+Time:
+    2022.05.11
+Creator:
+    Jie Wang
+Description:
+There are an unexpected big red circle in the middle of
+Solution:![image-20230511162958105](./buglog.assets/image-20230511162958105.png)
