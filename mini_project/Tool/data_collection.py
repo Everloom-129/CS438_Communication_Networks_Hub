@@ -9,6 +9,7 @@ from pywifi import const
 # TODO laplace smoothing
 NumberOfScan = 3 # Take median of each scanning to smooth output
 TestPoint    = 5 # Test point used for running program once
+input_data_path = "raw_data//illinois_raw_data_3L.csv"
 
 def scan_wifi(interface):
     interface.scan()
@@ -90,7 +91,7 @@ def main():
 
     print(f"Scanning Wi-Fi networks on interface {interface.name()}")
 
-    raw_data_file = "raw_data//illinois_net_raw_data.csv"
+    raw_data_file = input_data_path
 
     # Check if the file exists, and if not, create it with headers
     try:
@@ -102,7 +103,7 @@ def main():
 
 
 
-    with open("raw_data//illinois_net_raw_data.csv", mode="a", newline="") as csv_file:
+    with open(raw_data_file, mode="a", newline="") as csv_file:
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow(["SSID", "BSSID", "Signal Strength", "current BSSID", "x", "y"])
         

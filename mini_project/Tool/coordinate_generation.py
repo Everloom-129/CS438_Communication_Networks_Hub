@@ -33,7 +33,7 @@ def show_image_with_grid(image_path, grid_spacing_x=50, grid_spacing_y=50, outpu
     width, height = image.size
     aspect_ratio = width / height
 
-    with open(os.path.join(output_folder, 'img_size.txt'), 'a') as f:
+    with open(os.path.join(output_folder, 'img_size.txt'), 'w') as f:
         f.write(f"Image: {output_image_path}\n")
         f.write(f"Size: {width} x {height}\n")
         f.write(f"Aspect Ratio: {aspect_ratio}\n\n")
