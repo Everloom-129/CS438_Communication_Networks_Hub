@@ -51,4 +51,9 @@ Solution:
 
 ## Heatmap_generation
 
+
+- Image reversed 
+    x = n - x?
+- data coordinate 
+- 
 ## 

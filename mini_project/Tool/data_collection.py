@@ -46,11 +46,9 @@ def get_BSSID():
 
 def get_current_coordinate():
     # Add a function to get test point (x, y) by manually input
-    x = int(input("Enter the x-coordinate of the test point: "))
-    y = int(input("Enter the y-coordinate of the test point: "))
-    
+    x,y = input("Enter the xy-coordinate of the test point: ").split(",")
     # Return the coordinates as a tuple
-    return x, y
+    return int(x), int(y)
 
 def main():
     print("start finding wifi connection")
@@ -71,11 +69,11 @@ def main():
 
     print(f"Scanning Wi-Fi networks on interface {interface.name()}")
 
-    with open("raw_data//illinois_net_raw_data.csv", mode="w", newline="") as csv_file:
+    with open("raw_data//illinois_net_raw_data.csv", mode="a", newline="") as csv_file:
         csv_writer = csv.writer(csv_file)
         csv_writer.writerow(["SSID", "BSSID", "Signal Strength", "current BSSID", "x", "y"])
         
-        for _ in range(1):# test five points
+        for _ in range(5):# test five points
             test_times = 1
             x,y = get_current_coordinate()
             for i in range(test_times):
