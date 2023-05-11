@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import Rbf
 import seaborn as sns
 from PIL import Image
+import sys
 
 def generate_heatmap(data, x_points, y_points):
     if data.empty:
@@ -17,7 +18,7 @@ def generate_heatmap(data, x_points, y_points):
     X, Y = np.meshgrid(x_points, y_points)
 
     # Interpolate the signal strength using Radial Basis Function (RBF)
-    rbf = Rbf(x, y, signal_strength, function='multiquadric', smooth=1)
+    rbf = Rbf(x, y, signal_strength, function='multiquadric', smooth=1, epsilon=0.5)
     Z = rbf(X, Y)
 
     return X, Y, Z
@@ -25,8 +26,13 @@ def generate_heatmap(data, x_points, y_points):
 
 def main():
     # Read the raw data CSV file
-    # raw_data_file = "raw_data\illinois_net_raw_data.csv"
-    raw_data_file = "raw_data\preprocessed.csv"
+    if len(sys.argv) == 2:
+        bssid = sys.argv[1]
+        raw_data_file = f"raw_data\{bssid}.csv"
+        heatmap_path = f"heatmap\heatmap_{bssid}.png"
+    else:
+        raw_data_file = "raw_data\preprocessed.csv"
+        heatmap_path = "heatmap\heatmap_F1.png"
     
     data = pd.read_csv(raw_data_file)
     floor_plan_path = "AP_info\F1.png"
@@ -76,7 +82,6 @@ def main():
     ax.invert_yaxis()
 
     # Save the heatmap to a file
-    heatmap_path = "heatmap\heatmap_F1.png"
     plt.savefig(heatmap_path)
 
     # Show the plot
