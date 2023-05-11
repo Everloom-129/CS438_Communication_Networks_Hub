@@ -199,18 +199,8 @@ p3=& \frac{1}{2^{1-1}}*\frac{1}{2^{2-1}}*\frac{1}{2^{3-1}}*(1-\frac{1}{2^{4-1}})
 \end{align}
 $$
 
-### 3.
-For A, since 2 collisions have occurred, A can wait 0,1,2,3 slots until the next transmission.
-For B, since 3 collisions have occurred, B can wait 0,...,7 slots until the next attempt.
-In the case A wins the channel for the next packet, if A wait i slot, then B should wait more than i slots. 
-
-If i=0, the probability is  $\frac{1}{4} \times \frac{7}{8}=\frac{7}{32}$
-If i=1, the probability is $\frac{1}{4} \times \frac{6}{8}=\frac{6}{32}$
-If i=2, the probability is $\frac{1}{4} \times \frac{5}{8}=\frac{5}{32}$
-If i=3, the probability is $\frac{1}{4} \times \frac{4}{8}=\frac{4}{32}$
-The total probability is $\frac{7}{32}+\frac{6}{32}+\frac{5}{32}+\frac{4}{32}=\frac{11}{16}$
-
-
+### 3. 
+![image-20230509161832413](./CS438_Assignment_4.assets/image-20230509161832413.png)
 
 <div STYLE="page-break-after: always;"></div>
 
@@ -260,8 +250,5 @@ Since BPSK transfers 1 bit per symbol,
 
 the bit rate = bandwidth * bits/symbol = 10MHz * 1 = **10Mbps**
 
-#### (c)
-When SNR = 12dB, BER = $10^{-8}$. 
-
-- A packet is receive correctly only if no bit is in error, the probability is $(1-10^{-8})^{1500}= 0.9817$. 
-- So the probability of packet loss is $ 1-0.9817=0.0183$
+#### (c) BER for BPSK
+![image-20230509162104655](./CS438_Assignment_4.assets/image-20230509162104655.png)
