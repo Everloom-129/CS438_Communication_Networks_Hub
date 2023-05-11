@@ -50,7 +50,7 @@ def main():
     y_points = np.arange(0, floor_height, resolution)
 
     # Mark each (x,y) coordinate
-    ax.scatter(data["x"], data["y"], s=1, c='yellow')
+    ax.scatter(data["x"], data["y"], s=1, c='purple')
 
     # Generate the heatmap
     X, Y, Z = generate_heatmap(data, x_points, y_points)
@@ -64,7 +64,7 @@ def main():
     ax.imshow(floor_plan_array, origin="lower", extent=[0, floor_width, 0, floor_height], aspect='auto')
 
     # Plot the heatmap on top of the floor plan image
-    heatmap = ax.imshow(Z, cmap='coolwarm', alpha=0.5, origin='lower', extent=[0, floor_width, 0, floor_height], aspect='auto')
+    heatmap = ax.imshow(Z, cmap='jet', alpha=0.5, origin='lower', extent=[0, floor_width, 0, floor_height], aspect='auto')
     
     
     plt.colorbar(heatmap, label='Signal_Strength')
