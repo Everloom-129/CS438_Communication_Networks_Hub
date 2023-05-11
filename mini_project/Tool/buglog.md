@@ -28,6 +28,35 @@ Solution:
 
     We handle this difference in Data_preprocessing.py
 
+<--------------------------------------------------------->
+                          BUG 2                          
+<--------------------------------------------------------->
+Time:
+    2022.05.10.
+Creator:
+    Jie Wang.
+Description:
+    when I was collecting the data, I found the signal strength of one AP diverges greatly at the same point, like this:
+    AP1, (x1,y1), -86dB
+    AP1, (x1,y1), -60dB
+
+Solution:
+    There are several factors that can cause variations in signal strength for the same access point (AP) at the same location:
+
+1. Interference: Wi-Fi signals can be affected by interference from other electronic devices, such as microwaves, cordless phones, and other Wi-Fi networks, which can cause fluctuations in signal strength.
+
+2. Multipath propagation: In an indoor environment, Wi-Fi signals can bounce off walls, ceilings, and other objects, creating multiple paths for the signal to reach the receiver. This can lead to constructive and destructive interference, causing fluctuations in signal strength.
+
+3. Obstacles: Obstacles like walls, furniture, and people can absorb or reflect Wi-Fi signals, causing the signal strength to vary as the environment changes.
+
+4. Antenna orientation: The orientation of the antennas on both the access point and the client device can have a significant impact on the signal strength. Even small changes in the orientation of the device can result in fluctuations in signal strength.
+
+5. Device calibration: The accuracy of the signal strength measurements can also be affected by the calibration of the Wi-Fi hardware on the client device. Different devices or chipsets might report different signal strength values for the same access point.
+
+To minimize fluctuations in signal strength, you can try taking multiple measurements at each location and calculate the average signal strength. Additionally, make sure that there are no significant changes in the environment or the position of the client device during the data collection process.
+
+
+
 ## Data_preprocessing
 
 1st floor: wap-0563-20 to wap-0563-58

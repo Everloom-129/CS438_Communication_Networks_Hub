@@ -7,8 +7,8 @@ import re
 from pywifi import const
 
 # TODO laplace smoothing
-NumberOfScan = 3 # Take median of each scanning to smooth output
-TestPoint    = 5 # Test point used for running program once
+NumberOfScan = 1 # Take median of each scanning to smooth output
+TestPoint    = 1 # Test point used for running program once
 
 def scan_wifi(interface):
     interface.scan()
@@ -42,10 +42,28 @@ def get_BSSID():
         # print("match",match)
         bssid = match.group(0).split(': ')[1].strip()
         print('BSSID of Wi-Fi access point:', bssid)
+        ap_name = bssid_to_ap_name(bssid)
+        print("AP name is: ",ap_name)
         return bssid
     else:
         print('Unable to find BSSID in netsh output')
 
+
+def bssid_to_ap_name(bssid):
+    bssid_map = {}
+
+    # Read the "AP_info.csv" file and create a dictionary mapping BSSIDs to Access Point names
+    with open("AP_info\\AP_info.csv", mode="r") as csv_file:
+        csv_reader = csv.reader(csv_file)
+        for row in csv_reader:
+            if len(row) < 3:
+                continue
+            # print("translation!" b)
+            ap_name, bssid_mac, _ = row
+            bssid_map[bssid_mac] = ap_name
+
+    # Return the Access Point name for the given BSSID
+    return bssid_map.get(bssid, "Unknown AP")
 
 
 def get_current_coordinate():
