@@ -1,7 +1,12 @@
 import pandas as pd
 import numpy as np
 import sys
-pd.options.mode.chained_assignment = None
+
+# we turn off one of the panda warning to avoid annoying buggy words
+# the index method we take don't harm to the data integrity 
+# pd.options.mode.chained_assignment = None
+
+
 def remove_outliers(data, column, threshold=2):
     mean = np.mean(data[column])
     std_deviation = np.std(data[column])
@@ -10,7 +15,7 @@ def remove_outliers(data, column, threshold=2):
 
 def keep_current_mean(data):
     print("keep current")
-    filtered_df = data[data["current BSSID"] == "1"]
+    filtered_df = data[data["current BSSID"] == "1"].copy()
     if filtered_df.empty:
         return filtered_df
     filtered_df['Signal Strength'] = pd.to_numeric(filtered_df['Signal Strength'])
@@ -20,13 +25,14 @@ def keep_current_mean(data):
 
 def single_ap(data, bssid):
     # print("single")
-    filtered_df = data[data["BSSID"] == bssid]
+    filtered_df = data[data["BSSID"] == bssid].copy()
     if filtered_df.empty:
         return filtered_df
     filtered_df['Signal Strength'] = pd.to_numeric(filtered_df['Signal Strength'])
     mean_signal = filtered_df.groupby(['x', 'y'], as_index=False)['Signal Strength'].transform('mean')
     filtered_df['Signal Strength'] = mean_signal
     return filtered_df.drop_duplicates()
+
 
 
 def main():
