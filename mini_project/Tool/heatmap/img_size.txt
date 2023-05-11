@@ -1,4 +1,4 @@
-Image: heatmap\F0.png
-Size: 1238 x 906
-Aspect Ratio: 1.3664459161147904
+Image: heatmap\F3.png
+Size: 1275 x 843
+Aspect Ratio: 1.5124555160142348
 

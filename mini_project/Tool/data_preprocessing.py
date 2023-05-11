@@ -4,8 +4,8 @@ import sys
 import data_collection as dc
 
 # Global path variable
-default_info_path = "AP_info/AP_info_" + "L1.csv"
-raw_data_path = "raw_data/" + "eduroam" + "_raw_data_" + "1L.csv"
+default_info_path = "AP_info/AP_info_" + "L3.csv"
+raw_data_path = "raw_data/" + "illinois" + "_raw_data_" + "L3.csv" # eduroam or illinois
 preprocessed_path = "preprocessed_data/preprocessed_mean.csv"
 
 def remove_outliers(data, column, threshold=2):
@@ -53,7 +53,7 @@ def main():
     # data = remove_outliers(data, 'Signal Strength', threshold=2)
     mean_data = keep_current_mean(data)
     
-    BSSID_data = pd.read_csv(AP_info_path)["BSSID MAC"]
+    BSSID_data = pd.read_csv(AP_info_path)["BSSID-MAC"]
     for bssid in BSSID_data:
         single_ap(data, bssid)
 

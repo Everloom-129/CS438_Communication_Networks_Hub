@@ -6,9 +6,9 @@ import seaborn as sns
 from PIL import Image
 import sys
 
-floor_plan_path     = "AP_info\F1.png"
+floor_plan_path     = "AP_info\F3.png"
 default_data_path   = "preprocessed_data\preprocessed_mean.csv"
-default_output_path = "heatmap\heatmap_F1.png"
+default_output_path = "heatmap\heatmap_F3.png"
 
 
 def generate_heatmap(data, x_points, y_points):

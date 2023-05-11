@@ -8,8 +8,9 @@ from pywifi import const
 
 # TODO laplace smoothing
 NumberOfScan = 3 # Take median of each scanning to smooth output
-TestPoint    = 5 # Test point used for running program once
+TestPoint    = 7 # Test point used for running program once
 input_data_path = "raw_data//" + "illinois" + "_raw_data_"+ "L3.csv" # eduroam or illinois
+EMPTY_FLAG = 0
 
 def scan_wifi(interface):
     interface.scan()
@@ -26,7 +27,7 @@ def scan_wifi(interface):
         
         current = 1 if (current_BSSID==bssid) else 0
         if( current == 1 ):
-            print("=== ONE exists") 
+            print("=== Connect to BSSID ===") 
         wifi_data.append([ssid, bssid, signal_strength, current])
         # print(f"SSID: {ssid}, BSSID: {bssid}, Signal Strength: {signal_strength} dBm, current_bssid: {current}")
 
@@ -72,6 +73,10 @@ def get_current_coordinate():
     x,y = input("Enter the xy-coordinate of the test point: ").split(",")
     return int(x), int(y)
 
+def set_empty_test_point():
+    data = ["EMPTY_TEST","FF-FF-FF-FF-FF-FF","-100",1]
+    return data
+
 def main():
     print("start finding wifi connection")
     wifi = pywifi.PyWiFi()
@@ -109,6 +114,7 @@ def main():
         
         for _ in range(TestPoint):# test five points
             test_times = NumberOfScan
+            print("TEST : ",_+1)
             x,y = get_current_coordinate()
             for i in range(test_times):
                 wifi_data = scan_wifi(interface)
@@ -116,8 +122,13 @@ def main():
                     if data[0] == "IllinoisNet" or data[0] == "eduroam":
                         csv_writer.writerow(data + [x,y])
                 time.sleep(3)  # Wait for 5 seconds before scanning again
+        if(EMPTY_FLAG == 1):
+            print("INPUT EMPTY TEST POINTS")
+            for _ in range(8):
+                x,y = get_current_coordinate()
+                data = set_empty_test_point()
+                csv_writer.writerow(data + [x,y])
 
 
-    
 if __name__ == "__main__":
     main()
