@@ -8,19 +8,27 @@ def remove_outliers(data, column, threshold=2):
     filtered_data = data[(mean - threshold * std_deviation <= data[column]) & (data[column] <= mean + threshold * std_deviation)]
     return filtered_data
 
+def keep_current_mean(data):
+    filtered_df = data[data["current BSSID"] == "1"]
+    mean_data = filtered_df.groupby(['x', 'y'], as_index=False)['Signal Strength'].mean()
+    return mean_data
+
 def main():
     if len(sys.argv) > 2:
         data_file = sys.argv[1]
         network_stats_file = sys.argv[2]
     else:
-        network_stats_file = "preprocessed_data/network_stats.csv"
-        print(" Read the collected data CSV file")
-        data_file = "raw_data/raw_data.csv"
+        data_file = "raw_data/illinois_net_raw_data.csv"
     data = pd.read_csv(data_file)
 
     data = data.drop_duplicates()
     data = data.dropna()
-    data = remove_outliers(data, 'Signal Strength', threshold=2)
+    # data = remove_outliers(data, 'Signal Strength', threshold=2)
+    data = keep_current_mean(data)
+    try:
+        data.to_csv("raw_data/preprocessed.csv", index=False)
+    except:
+        print("failed to save to file")
 
     # # Calculate the average signal strength for each BSSID and the number of unique BSSIDs for each SSID
     # bssid_stats = data.groupby(['SSID', 'BSSID'])['Signal Strength'].agg(['mean', 'count']).reset_index()
