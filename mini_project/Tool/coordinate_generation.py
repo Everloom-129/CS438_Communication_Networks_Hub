@@ -6,21 +6,29 @@ from PIL import Image
 import sys
 
 def show_image_with_grid(image_path, grid_spacing_x=50, grid_spacing_y=50, output_folder='heatmap'):
-    # Load the image using PIL (Python Imaging Library)
+    """
+    Displays an image with a grid overlaid and saves the output.
+
+    @param image_path: Path to the image to be displayed.
+    @param grid_spacing_x: Spacing between vertical grid lines. Default is 50 pixels.
+    @param grid_spacing_y: Spacing between horizontal grid lines. Default is 50 pixels.
+    @param output_folder: Directory where the output image and details will be saved. Default is 'heatmap' folder in current directory.
+
+    Note: The image is displayed using matplotlib's imshow function. A grid is overlaid on the image 
+    using the grid_spacing_x and grid_spacing_y values. The output image (with grid) is saved in the 
+    specified output_folder, along with a text file containing image details such as size and aspect ratio.
+    """
     image = Image.open(image_path)
     img_array = np.array(image)
 
-    # Create a new figure and axis
     fig, ax = plt.subplots()
 
-    # Display the image on the axis
     ax.imshow(img_array)
 
     # Set the grid spacing (you can adjust these values to change the grid size)
     ax.xaxis.set_major_locator(ticker.MultipleLocator(grid_spacing_x))
     ax.yaxis.set_major_locator(ticker.MultipleLocator(grid_spacing_y))
 
-    # Customize the grid appearance
     ax.grid(which='major', color='grey', linestyle='--', linewidth=1, alpha=0.1)
 
     # Save the output image and text file

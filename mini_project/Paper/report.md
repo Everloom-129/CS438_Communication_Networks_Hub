@@ -40,6 +40,9 @@ Discuss the challenges faced during the project and how they were addressed.
 
 \section{Recommendations}
 Provide recommendations for improving the existing wireless network infrastructure based on the analysis.
+\begin{acknowledgements}
+The authors would like to express their gratitude to [Name] for their valuable insights and technical assistance throughout the project. We also thank [Name] for their constructive feedback on earlier drafts of this manuscript. Additionally, we appreciate the financial support provided by [Funding Agency/Grant Number]. Finally, we wish to thank our families and friends for their continuous support and encouragement during the course of this work.
+\end{acknowledgements}
 
 \section{Conclusion}
 Summarize the main findings, implications, and future work.

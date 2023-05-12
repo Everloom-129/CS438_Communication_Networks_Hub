@@ -8,14 +8,15 @@ default_info_path = "AP_info/AP_info_" + "L3.csv"
 raw_data_path = "raw_data/" + "illinois" + "_raw_data_" + "L3.csv" # eduroam or illinois
 preprocessed_path = "preprocessed_data/preprocessed_mean.csv"
 
-def remove_outliers(data, column, threshold=2):
-    mean = np.mean(data[column])
-    std_deviation = np.std(data[column])
-    filtered_data = data[(mean - threshold * std_deviation <= data[column]) & (data[column] <= mean + threshold * std_deviation)]
-    return filtered_data
-
 def keep_current_mean(data):
-    print("keep current")
+    """
+    Filters a DataFrame to keep only the connected wifi signal, then calculates the mean signal strength for each (x, y) pair.
+
+    @param data: The pandas DataFrame to filter and calculate mean signal strength.
+
+    @return: connected wifi
+    """
+    print("Recording the current connection")
     filtered_df = data[data["current BSSID"] == "1"].copy()
     if filtered_df.empty:
         return filtered_df
@@ -25,7 +26,16 @@ def keep_current_mean(data):
     return filtered_df.drop_duplicates()
 
 def single_ap(data, bssid):
-    # print("single")
+    """
+    Filters a DataFrame to keep only the rows where the 'BSSID' column matches the provided BSSID,
+    then calculates the mean signal strength for each (x, y) pair. 
+    The result is saved to a CSV file named after the BSSID.
+
+    @param data: The pandas DataFrame to filter and calculate mean signal strength.
+    @param bssid: The BSSID to filter by.
+
+    @return: None
+    """
     filtered_df = data[data["BSSID"] == bssid].copy()
     if filtered_df.empty:
         return filtered_df
@@ -50,7 +60,7 @@ def main():
     data = pd.read_csv(data_file)
 
     data = data.dropna()
-    # data = remove_outliers(data, 'Signal Strength', threshold=2)
+    print("start preprocessing data")
     mean_data = keep_current_mean(data)
     
     BSSID_data = pd.read_csv(AP_info_path)["BSSID-MAC"]

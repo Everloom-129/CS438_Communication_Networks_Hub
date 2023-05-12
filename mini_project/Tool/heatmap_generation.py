@@ -12,6 +12,16 @@ default_output_path = "heatmap\heatmap_F3.png"
 
 
 def generate_heatmap(data, x_points, y_points):
+    """
+    Generates a heatmap using the provided data and grid of points.
+
+    @param data: A DataFrame containing 'x', 'y', and 'Signal Strength' columns.
+    @param x_points: An array of x-coordinates representing the grid of points.
+    @param y_points: An array of y-coordinates representing the grid of points.
+
+    @return: Three 2D arrays representing the grid of x-coordinates, y-coordinates, and interpolated signal strengths respectively. 
+             If no data points are found, return None for each.
+    """
     if data.empty:
         print("Error: No data points found. Please ensure the input file has valid data.")
         return None, None, None

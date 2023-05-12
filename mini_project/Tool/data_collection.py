@@ -6,13 +6,22 @@ import subprocess
 import re
 from pywifi import const
 
-# TODO laplace smoothing
-NumberOfScan = 3 # Take median of each scanning to smooth output
-TestPoint    = 7 # Test point used for running program once
+
+NumberOfScan = 0 # Take median of each scanning to smooth output
+TestPoint    = 0 # Test point used for running program once
 input_data_path = "raw_data//" + "illinois" + "_raw_data_"+ "L3.csv" # eduroam or illinois
-EMPTY_FLAG = 0
+EMPTY_FLAG = 1
 
 def scan_wifi(interface):
+    """
+    Scans for Wi-Fi networks and returns a list of networks with their SSID, BSSID, 
+    signal strength, and a flag indicating if the network is the current one.
+
+    @param interface: The Wi-Fi interface to use for scanning.
+
+    @return: A list of Wi-Fi networks, each represented as a list containing 
+    the SSID, BSSID, signal strength, and a flag indicating if the network is the current one.
+    """
     interface.scan()
     time.sleep(3)  # Give some time for the scan to complete
     networks = interface.scan_results()
@@ -34,6 +43,12 @@ def scan_wifi(interface):
     return wifi_data
 
 def get_BSSID():
+    """
+    Gets the BSSID of the currently connected Wi-Fi network by running the 'netsh' command.
+
+    @return: The BSSID of the currently connected Wi-Fi network. 
+    If no BSSID is found in the 'netsh' output, returns None.
+    """
     # Run the netsh command and capture its output
     output = subprocess.check_output(['netsh', 'wlan', 'show', 'interfaces'])
     # print("output: ", output)
@@ -52,6 +67,14 @@ def get_BSSID():
 
 
 def bssid_to_ap_name(bssid):
+    """
+    Translates a BSSID to an Access Point name by looking it up in the "AP_info\\AP_info_all.csv" file.
+
+    @param bssid: The BSSID to translate.
+
+    @return: The Access Point name corresponding to the BSSID. If the BSSID is not found in the file, returns "Unknown AP".
+    Note: this func may fail after removing the APinfo
+    """
     bssid_map = {}
 
     # Read the "AP_info.csv" file and create a dictionary mapping BSSIDs to Access Point names
@@ -69,11 +92,21 @@ def bssid_to_ap_name(bssid):
 
 
 def get_current_coordinate():
+    """
+    Gets the current coordinates by prompting the user to enter them.
+
+    @return: A tuple containing the x and y coordinates.
+    """
     # Add a function to get test point (x, y) by manually input
     x,y = input("Enter the xy-coordinate of the test point: ").split(",")
     return int(x), int(y)
 
 def set_empty_test_point():
+    """
+    Gets the current coordinates by prompting the user to enter them.
+
+    @return: A tuple containing the x and y coordinates.
+    """
     data = ["EMPTY_TEST","FF-FF-FF-FF-FF-FF","-100",1]
     return data
 
