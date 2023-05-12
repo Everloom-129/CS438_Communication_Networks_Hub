@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 import sys
-import data_collection as dc
+
 
 # Global path variable
 default_info_path = "AP_info/AP_info_" + "L3.csv"
