@@ -9,7 +9,7 @@ from pywifi import const
 
 NumberOfScan = 0 # Take median of each scanning to smooth output
 TestPoint    = 0 # Test point used for running program once
-input_data_path = "raw_data//" + "illinois" + "_raw_data_"+ "L3.csv" # eduroam or illinois
+input_data_path = "raw_data//" + "eduroam" + "_raw_data_"+ "L1.csv" # eduroam or illinois
 EMPTY_FLAG = 1
 
 def scan_wifi(interface):
@@ -107,7 +107,7 @@ def set_empty_test_point():
 
     @return: A tuple containing the x and y coordinates.
     """
-    data = ["EMPTY_TEST","FF-FF-FF-FF-FF-FF","-100",1]
+    data = ["EMPTY_TEST","FF-FF-FF-FF-FF-FF","-80",1]
     return data
 
 def main():
@@ -157,7 +157,7 @@ def main():
                 time.sleep(3)  # Wait for 5 seconds before scanning again
         if(EMPTY_FLAG == 1):
             print("INPUT EMPTY TEST POINTS")
-            for _ in range(8):
+            for _ in range(3):
                 x,y = get_current_coordinate()
                 data = set_empty_test_point()
                 csv_writer.writerow(data + [x,y])

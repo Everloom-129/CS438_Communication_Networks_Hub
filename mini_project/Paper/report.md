@@ -35,8 +35,19 @@ Detailed explanation of the methodologies used in the project, which can be divi
 \section{Results and Discussion}
 Present the findings of the project and interpret them in this section.
 
+We observed that some APs were never accessed in 
+router | problem
+wap-0563-32, wap-0563-33, wap-0563-34 : all connect to farther wap-0563-31
+wap-0563-34 : address is wrong, connnect to wap-0563-37
+wap-0563-36 : weak, -62 dBm
+wap-0563-42 ： weak, priority connect to farther wap-0563-48
+
+
 \section{Challenges}
 Discuss the challenges faced during the project and how they were addressed.
+
+However, due to time limite 
+
 
 \section{Recommendations}
 Provide recommendations for improving the existing wireless network infrastructure based on the analysis.

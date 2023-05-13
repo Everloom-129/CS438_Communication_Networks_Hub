@@ -5,8 +5,8 @@ import os
 
 
 # Global path variable
-default_info_path = "AP_info/AP_info_" + "L3.csv"
-raw_data_path = "raw_data/" + "illinois" + "_raw_data_" + "L3.csv" # eduroam or illinois
+default_info_path = "AP_info/AP_info_" + "L1.csv"
+raw_data_path = "raw_data/" + "eduroam" + "_raw_data_" + "L1.csv" # eduroam or illinois
 preprocessed_path = "preprocessed_data/preprocessed_mean.csv"
 
 def keep_current_mean(data):

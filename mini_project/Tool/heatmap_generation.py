@@ -7,9 +7,9 @@ from PIL import Image
 import time
 import sys
 
-floor_plan_path     = "AP_info\F3.png"
+floor_plan_path     = "AP_info\F1.png"
 default_data_path   = "preprocessed_data\preprocessed_mean.csv"
-default_output_path = "result\heatmap_F3.png"
+default_output_path = "result\heatmap_F1.png"
 
 
 def generate_heatmap(data, x_points, y_points):

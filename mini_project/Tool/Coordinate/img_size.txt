@@ -2,3 +2,7 @@ Image: Coordinate\F3.png
 Size: 1275 x 843
 Aspect Ratio: 1.5124555160142348
 
+Image: Coordinate\F1.png
+Size: 1164 x 889
+Aspect Ratio: 1.3093363329583803
+
