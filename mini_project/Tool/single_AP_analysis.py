@@ -1,14 +1,18 @@
 import pandas as pd
 import csv
-
-floor = input("choose floor: 1 3\n")
+import os
+# Save the output image and text file
+output_folder = "result"
+if not os.path.exists(output_folder):
+    os.makedirs(output_folder)
+floor = input("choose floor 1 or 3? :") 
 if (floor == "1"):
     raw_data_path = "raw_data/" + "eduroam" + "_raw_data_" + "L" + floor + ".csv" # eduroam or illinois
     default_info_path = "AP_info/AP_info_L" + floor + ".csv"
 else:  
     raw_data_path = "raw_data/" + "Illinois" + "_raw_data_" + "L" + floor + ".csv" # eduroam or illinois
     default_info_path = "AP_info/AP_info_L" + floor + ".csv"
-single_path = "analysis/single_AP_strength_L" +floor+" .csv"
+single_path = output_folder + "/single_AP_strength_L" +floor+" .csv"
 strength_dict = {}
 MAC_passed = []
 test_time = {}

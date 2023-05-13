@@ -1,6 +1,6 @@
 import pandas as pd
 import csv
-sheet = pd.read_excel(io = 'AP_BSSID.xlsx')
+sheet = pd.read_excel(io = 'AP_info\AP_BSSID.xlsx')
 floor = input("input the floor you want, choice: 0 1 2 3 4 all\n")
 data = []
 AP_range = [(1,19),(20,58),(59,98),(99,135),(135,171)]
@@ -10,9 +10,9 @@ for i in sheet.index.values:
 
     data.append(row_data)
 if (floor == "all"):
-    f = open('AP_info_all.csv','w')
+    f = open('AP_info\AP_info_all.csv','w')
 else:
-    file_name = "AP_info_" + "L" + floor + ".csv"
+    file_name = "AP_info\AP_info_" + "L" + floor + ".csv"
     print(file_name)
     f = open(file_name, "w")
 writer = csv.writer(f)

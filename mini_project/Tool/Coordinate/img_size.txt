@@ -1,0 +1,4 @@
+Image: Coordinate\F3.png
+Size: 1275 x 843
+Aspect Ratio: 1.5124555160142348
+

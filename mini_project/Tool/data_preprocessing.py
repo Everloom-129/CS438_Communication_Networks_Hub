@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import sys
+import os
 
 
 # Global path variable
@@ -58,6 +59,11 @@ def main():
         AP_info_path = default_info_path
         data_file = raw_data_path
     data = pd.read_csv(data_file)
+
+    # Save the output image and text file
+    output_folder = "preprocessed_data"
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
 
     data = data.dropna()
     print("start preprocessing data")
