@@ -4,11 +4,12 @@ import matplotlib.pyplot as plt
 from scipy.interpolate import Rbf
 import seaborn as sns
 from PIL import Image
+import time
 import sys
 
 floor_plan_path     = "AP_info\F3.png"
 default_data_path   = "preprocessed_data\preprocessed_mean.csv"
-default_output_path = "heatmap\heatmap_F3.png"
+default_output_path = "result\heatmap_F3.png"
 
 
 def generate_heatmap(data, x_points, y_points):
@@ -44,11 +45,12 @@ def main():
     if len(sys.argv) == 2:
         bssid = sys.argv[1]
         mac_data_file = f"preprocessed_data\{bssid}.csv"
-        heatmap_path = f"heatmap\heatmap_{bssid}.png"
+        heatmap_path  = f"result\{bssid}.png"
     else:
         mac_data_file = default_data_path
         heatmap_path = default_output_path
-    
+    print("reading data...")
+    time.sleep(2)
     data = pd.read_csv(mac_data_file)
     
     # Load the floor plan image using PIL (Python Imaging Library)
@@ -75,7 +77,7 @@ def main():
 
     # Generate the heatmap
     X, Y, Z = generate_heatmap(data, x_points, y_points)
-    print("X,Y,Z : ",X,Y,Z)
+    # print("X,Y,Z : ",X,Y,Z)
     # Check if heatmap data is generated
     if X is None or Y is None or Z is None:
         print("Heatmap not generated due to empty data.")
@@ -101,6 +103,7 @@ def main():
 
     # Show the plot
     plt.show()
+    print("Heatmap generated!")
 
 if __name__ == "__main__":
     main()

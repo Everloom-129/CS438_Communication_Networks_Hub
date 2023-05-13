@@ -1,0 +1,20 @@
+Image: heatmap\F0.png
+Size: 1238 x 906
+Aspect Ratio: 1.3664459161147904
+
+Image: heatmap\F1.png
+Size: 1164 x 889
+Aspect Ratio: 1.3093363329583803
+
+Image: heatmap\F2.png
+Size: 1236 x 859
+Aspect Ratio: 1.438882421420256
+
+Image: heatmap\F3.png
+Size: 1275 x 843
+Aspect Ratio: 1.5124555160142348
+
+Image: heatmap\F4.png
+Size: 1245 x 808
+Aspect Ratio: 1.5408415841584158
+

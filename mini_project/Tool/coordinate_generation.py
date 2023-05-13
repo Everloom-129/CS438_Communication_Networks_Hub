@@ -5,7 +5,7 @@ import numpy as np
 from PIL import Image
 import sys
 
-def show_image_with_grid(image_path, grid_spacing_x=50, grid_spacing_y=50, output_folder='heatmap'):
+def show_image_with_grid(image_path, grid_spacing_x=50, grid_spacing_y=50, output_folder='Coordinate'):
     """
     Displays an image with a grid overlaid and saves the output.
 
@@ -41,7 +41,7 @@ def show_image_with_grid(image_path, grid_spacing_x=50, grid_spacing_y=50, outpu
     width, height = image.size
     aspect_ratio = width / height
 
-    with open(os.path.join(output_folder, 'img_size.txt'), 'w') as f:
+    with open(os.path.join(output_folder, 'img_size.txt'), 'a') as f:
         f.write(f"Image: {output_image_path}\n")
         f.write(f"Size: {width} x {height}\n")
         f.write(f"Aspect Ratio: {aspect_ratio}\n\n")
@@ -61,7 +61,9 @@ def main():
         selected_floor = int(input("Enter the floor number to be printed (0-4): "))
     if 0 <= selected_floor < len(image_list):
         show_image_with_grid(image_list[selected_floor])
-        
+    else:
+        print("Typed in wrong floor!")
+    # Show all the image
     # selected_floor = 0
     # while selected_floor <5:
     #     show_image_with_grid(image_list[selected_floor])
